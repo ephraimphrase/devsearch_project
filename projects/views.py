@@ -14,7 +14,7 @@ def project(request, pk):
     projectObj = Project.objects.get(id=pk)
     return render(request, 'projects/single-project.html', {'project': projectObj})
 
-@login_required
+@login_required(login_url='login')
 def createProject(request):
     form = ProjectForm()
 
@@ -27,6 +27,7 @@ def createProject(request):
     context = {'form': form}
     return render(request, 'projects/project_form.html', context)
 
+@login_required(login_url='login')
 def updateProject(request, pk):
     project = Project.objects.get(id=pk)
     form = ProjectForm(instance= project)
@@ -40,6 +41,7 @@ def updateProject(request, pk):
     context = {'form': form}
     return render(request, 'projects/project_form.html', context)
 
+@login_required(login_url='login')
 def deleteProject(request, pk):
     project = Project.objects.get(id=pk)
     if request.method == 'POST':
